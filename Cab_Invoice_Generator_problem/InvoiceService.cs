@@ -7,14 +7,21 @@ namespace Cab_Invoice_Generator
         private readonly int costPerKilometerNormal = 10;
         private readonly int minimumFareNormal = 5;
         private readonly int costPerMinuteNormal = 1;
+        public int totalNumOfRides = 0;
+        public double totalFare = 0;
+        public double averageFare = 0;
 
-
-        public int NumberOfRides
+        public int TotalNumOfRides()
         {
-            get
-            {
-                return this.NumberOfRides;
-            }
+            return totalNumOfRides;
+        }
+        public double TotalFare()
+        {
+            return totalFare;
+        }
+        public double AverageFare()
+        {
+            return averageFare;
         }
         public double CalculateFare(double distance , double time)
         {
@@ -27,14 +34,13 @@ namespace Cab_Invoice_Generator
         }
         public double CalculateFare(Ride[] rides)
         {
-            double totalAmount = 0; 
             foreach (var ride in rides) 
             {
-                totalAmount += ride.Distance * costPerKilometerNormal + ride.Time * costPerMinuteNormal;
+                totalFare += ride.Distance * costPerKilometerNormal + ride.Time * costPerMinuteNormal;
             }
-            int numOfRides = rides.Length;
-            double aggregateAmount = totalAmount / numOfRides;
-            return aggregateAmount;
+            totalNumOfRides = rides.Length;
+           averageFare = totalFare / totalNumOfRides;
+            return averageFare;
 
         }
     }
