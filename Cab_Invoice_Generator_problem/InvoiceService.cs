@@ -1,4 +1,6 @@
-﻿namespace Cab_Invoice_Generator
+﻿using Cab_Invoice_Generator_problem;
+
+namespace Cab_Invoice_Generator
 {
     public class InvoiceService
     {
@@ -22,6 +24,18 @@
                 return TotalAmount;
             }
             return minimumFareNormal;
+        }
+        public double CalculateFare(Ride[] rides)
+        {
+            double totalAmount = 0; 
+            foreach (var ride in rides) 
+            {
+                totalAmount += ride.Distance * costPerKilometerNormal + ride.Time * costPerMinuteNormal;
+            }
+            int numOfRides = rides.Length;
+            double aggregateAmount = totalAmount / numOfRides;
+            return aggregateAmount;
+
         }
     }
 }
