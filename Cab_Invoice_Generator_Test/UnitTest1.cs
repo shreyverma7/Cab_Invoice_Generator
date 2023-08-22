@@ -10,7 +10,7 @@ namespace Cab_Invoice_Generator_Test
         [Test]
         public void GivenDistanceAndTime_WhenChecked_ReturnFareValue()
         {
-            double actual = invoiceservice.CalculateFare(10, 5);
+            double actual = invoiceservice.CalculateFare("NORMAL",10, 5);
             double expected = 105;
             Assert.AreEqual(actual, expected);
         }
@@ -19,7 +19,7 @@ namespace Cab_Invoice_Generator_Test
         {
             Ride[] ride =
             {
-                new Ride(){Distance = 10,Time = 5}
+                new Ride(){Distance = 10,Time = 5,RideType = "NORMAL"}
             };
             double actual = invoiceservice.CalculateFare(ride);
             double expected = 105;
@@ -30,7 +30,8 @@ namespace Cab_Invoice_Generator_Test
         {
             Ride[] ride =
             {
-                new Ride(){Distance = 10,Time = 5}
+                new Ride(){Distance = 10,Time = 5,RideType = "NORMAL" },
+                new Ride(){Distance = 10,Time = 5,RideType = "PREMIUM"}
             };
             invoiceservice.CalculateFare(ride);
             int actual = invoiceservice.TotalNumOfRides();
@@ -43,7 +44,7 @@ namespace Cab_Invoice_Generator_Test
             string userId = "Shrey";
             Ride[] ride =
             {
-                new Ride(){Distance = 10,Time = 5}
+                new Ride(){Distance = 10,Time = 5, RideType = "NORMAL"}
             };
             RideRepository rideRepository = new RideRepository();
             rideRepository.AddRides(userId,ride);   

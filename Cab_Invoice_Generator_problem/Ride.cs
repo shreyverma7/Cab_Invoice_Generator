@@ -10,5 +10,6 @@ namespace Cab_Invoice_Generator_problem
     {
         public int Distance { get; set; }
         public int Time { get; set; }   
+        public string RideType { get; set; }   
     }
 }
